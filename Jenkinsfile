@@ -2,8 +2,9 @@ pipeline {
 	
 		stages{
 				stage('SCM Checkout'){
+					steps{
 					git 'https://github.com/ajaynaphade969/maven-project'
-			
+					}
 				}
 		
 	
