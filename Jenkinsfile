@@ -34,27 +34,16 @@ pipeline {
 					}
 				}
 			stage('Deploy to Tomcat'){
+
 				steps{
-					sshPublisher(publishers: [sshPublisherDesc(configName: 'tomcat', 
-								   transfers: [sshTransfer(cleanRemote: false, 
-											   excludes: '', execCommand: '', 
-											   execTimeout: 120000, 
-											   flatten: false, 
-											   makeEmptyDirs: false, 
-											   noDefaultExcludes: false, 
-											   patternSeparator: '[, ]+', 
-											   remoteDirectory: '', 
-											   remoteDirectorySDF: false, 
-											   removePrefix: '', 
-											   sourceFiles: '**/*.war')], 
-								   usePromotionTimestamp: false, 
-								   useWorkspaceInPromotion: false, 
-								   verbose: false)])
+					sshagent(['172.31.44.18']) {
+						sh 'scp -o StrictHostKeyChecking=no -l **/*.war ec2-user@172.31.44.18:/var/lib/tomcat/webapps'
+						}
+					}
 				}
-			}
+			
 			
 			
 			
 		}
-	
 }
