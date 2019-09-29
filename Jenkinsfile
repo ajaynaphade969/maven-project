@@ -24,6 +24,16 @@ pipeline {
 						}
 					}
 				}
+			
+			stage ('Code install'){
+					steps
+					{
+						withMaven(maven: 'MAVEN_HOME'){
+						sh 'mvn install'
+						}
+					}
+				}
+			
 		}
 	
 }
